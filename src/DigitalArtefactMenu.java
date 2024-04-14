@@ -3,13 +3,7 @@ import java.util.concurrent.ThreadLocalRandom;
 class DigitalArtefactMenu{
     private static Scanner input = new Scanner(System.in);
     //Declare global variables that can be used multiple times
-    //Variables for createNPC()
-    //private static String nameNPC;
-    //private static String ageNPC;
-    //private static String genderNPC;
-    //private static String voiceNPC;
-    //private static String locationNPC;
-    //private static String categoryNPC;
+    //String array for createNPC()
     private static String[] attributesNPC = new String [7];
     //Variables for editNPC()
     private static String changeAttribute;
