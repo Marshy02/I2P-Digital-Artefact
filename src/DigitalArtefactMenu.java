@@ -5,10 +5,7 @@ class DigitalArtefactMenu{
     //Declare global variables that can be used multiple times
     //NPC Object
     private static NonPlayerCharacter NPCAttributes = new NonPlayerCharacter();
-    //Variables for editNPC()
-    private static String changeAttribute;
-    //Variables for dndPun()
-    private static int randomPun;
+
     public static void main(String[] args){
         System.out.println("Hello and welcome to your D&D NPC Builder and Tracker!");
 
@@ -95,7 +92,7 @@ class DigitalArtefactMenu{
         System.out.println("You've chosen to edit information about " + NPCAttributes.name);
         System.out.println("---------------------------------------------------------------------------");
         System.out.println("Which attribute would you like to change?");
-        changeAttribute = input.nextLine();
+        String changeAttribute = input.nextLine();
         switch (changeAttribute){
             case "Name":
                 System.out.println("What would you like to change their name to?");
@@ -130,7 +127,7 @@ class DigitalArtefactMenu{
     }
 
     public static void dndPun(){
-        randomPun = ThreadLocalRandom.current().nextInt(1, 3 + 1);
+        int randomPun = ThreadLocalRandom.current().nextInt(1, 3 + 1);
         switch (randomPun) {
             case 1:
                 System.out.println("Why do paladins prefer chain mail? Because it’s holey armor.");
