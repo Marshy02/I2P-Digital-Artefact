@@ -13,11 +13,12 @@ class DigitalArtefactMenu{
         //Loop the user until they wish to exit the system
         String stayOption = "Yes";
         while(!(stayOption.equals("No")) && !(stayOption.equals("no")) && !(stayOption.equals("N")) && !(stayOption.equals("n"))) {
-            System.out.println("Please select one of the following options:" +
-                    "\nOPTION 1 - Create a new Non-Player Character" +
-                    "\nOPTION 2 - View information about your NPC" +
-                    "\nOPTION 3 - Edit information about your NPC" +
-                    "\nOPTION 4 - Hear a bad D&D themed pun");
+            System.out.println("""
+                    Please select one of the following options:
+                    OPTION 1 - Create a new Non-Player Character
+                    OPTION 2 - View information about your NPC
+                    OPTION 3 - Edit information about your NPC
+                    OPTION 4 - Hear a bad D&D themed pun""");
             int userChoice = input.nextInt();
             input.nextLine();
 
