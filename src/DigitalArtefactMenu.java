@@ -4,8 +4,7 @@ class DigitalArtefactMenu{
     private static Scanner input = new Scanner(System.in);
     //Declare global variables that can be used multiple times
     //Variables for createNPC()
-    private static String firstNameNPC;
-    private static String lastNameNPC;
+    private static String nameNPC;
     private static String ageNPC;
     private static String genderNPC;
     private static String voiceNPC;
@@ -62,10 +61,8 @@ class DigitalArtefactMenu{
     public static void createNPC(){
         System.out.println("You've selected to build an NPC, please provide some information about them");
         System.out.println("---------------------------------------------------------------------------");
-        System.out.println("What is this character's first name? If they have a middle name, please include that here");
-        firstNameNPC = input.nextLine();
-        System.out.println("What is this character's last name?");
-        lastNameNPC = input.nextLine();
+        System.out.println("What is this character's name?");
+        nameNPC = input.nextLine();
         System.out.println("How old are they?");
         ageNPC = input.nextLine();
         System.out.println("What is their gender?");
@@ -81,9 +78,9 @@ class DigitalArtefactMenu{
     }
 
     public static void readNPC(){
-        System.out.println("You've selected to view details about " + firstNameNPC);
+        System.out.println("You've selected to view details about " + nameNPC);
         System.out.println("---------------------------------------------------------------------------");
-        System.out.println("Name: " + firstNameNPC + " " + lastNameNPC);
+        System.out.println("Name: " + nameNPC);
         System.out.println("Age: " + ageNPC);
         System.out.println("Gender: " + genderNPC);
         System.out.println("Voice: " + voiceNPC);
@@ -93,18 +90,14 @@ class DigitalArtefactMenu{
     }
 
     public static void editNPC(){
-        System.out.println("You've chosen to edit information about " + firstNameNPC);
+        System.out.println("You've chosen to edit information about " + nameNPC);
         System.out.println("---------------------------------------------------------------------------");
         System.out.println("Which attribute would you like to change?");
         changeAttribute = input.nextLine();
         switch (changeAttribute){
-            case "First name":
-                System.out.println("What would you like to change their first name to?");
-                firstNameNPC = input.nextLine();
-                break;
-            case "Last name":
-                System.out.println("What would you like to change their last name to?");
-                lastNameNPC = input.nextLine();
+            case "Name":
+                System.out.println("What would you like to change their name to?");
+                nameNPC = input.nextLine();
                 break;
             case "Age":
                 System.out.println("How old should they be?");
