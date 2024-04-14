@@ -4,7 +4,8 @@ class DigitalArtefactMenu{
     private static Scanner input = new Scanner(System.in);
     //Declare global variables that can be used multiple times
     //String array for createNPC()
-    private static String[] attributesNPC = new String [7];
+    //private static String[] attributesNPC = new String [7];
+    private static NonPlayerCharacter NPCAttributes = new NonPlayerCharacter();
     //Variables for editNPC()
     private static String changeAttribute;
     //Variables for dndPun()
@@ -15,7 +16,7 @@ class DigitalArtefactMenu{
         //Get the user to pick an option from the menu
         //Loop the user until they wish to exit the system
         String stayOption = "Yes";
-        while(!(stayOption.equals("No"))) {
+        while(!(stayOption.equals("No")) && !(stayOption.equals("no")) && !(stayOption.equals("N")) && !(stayOption.equals("n"))) {
             System.out.println("Please select one of the following options:" +
                     "\nOPTION 1 - Create a new Non-Player Character" +
                     "\nOPTION 2 - View information about your NPC" +
@@ -39,11 +40,14 @@ class DigitalArtefactMenu{
                         dndPun();
                         break;
                 }
-                do {                                    //Loop until the user answers Yes or No
+                do {                                    //Loop until the user answers Yes or No, accepting similar formats
                     System.out.println("Do you wish to continue? (Yes/No)");
                     stayOption = input.nextLine();
                 }
-                while(!(stayOption.equals("Yes")) && !(stayOption.equals("No")));
+                while(!(stayOption.equals("Yes")) && !(stayOption.equals("No")) &&
+                !(stayOption.equals("yes")) && !(stayOption.equals("no")) &&
+                !(stayOption.equals("Y")) && !(stayOption.equals("N")) &&
+                !(stayOption.equals("y")) && !(stayOption.equals("n")));
             } else {                                    //Exit out if user chooses an option not between 1 and 4
                 System.out.println("Invalid option chosen, please start again");
             }
@@ -57,70 +61,70 @@ class DigitalArtefactMenu{
         System.out.println("You've selected to build an NPC, please provide some information about them");
         System.out.println("---------------------------------------------------------------------------");
         System.out.println("What is this character's name?");
-        attributesNPC[0] = input.nextLine();
+        NPCAttributes.name = input.nextLine();
         System.out.println("How old are they?");
-        attributesNPC[1] = input.nextLine();
+        NPCAttributes.age = input.nextLine();
         System.out.println("What is their gender?");
-        attributesNPC[2] = input.nextLine();
+        NPCAttributes.gender = input.nextLine();
         System.out.println("What is their race? Please select one of the following options:" +
                 "\nHuman\nElf\nDwarf");
-        attributesNPC[3] = input.nextLine();
+        NPCAttributes.race = input.nextLine();
         System.out.println("What do they sound like?");
-        attributesNPC[4] = input.nextLine();
+        NPCAttributes.voice = input.nextLine();
         System.out.println("Where will they be first encountered?");
-        attributesNPC[5] = input.nextLine();
+        NPCAttributes.location = input.nextLine();
         System.out.println("What category do they fall under? Please select one of the following options:" +
                 "\nAllies\nEnemies\nService Providers\nQuest Givers\nNeutral Parties");
-        attributesNPC[6] = input.nextLine();
+        NPCAttributes.category = input.nextLine();
         System.out.println("---------------------------------------------------------------------------");
     }
 
     public static void readNPC(){
-        System.out.println("You've selected to view details about " + attributesNPC[0]);
+        System.out.println("You've selected to view details about " + NPCAttributes.name);
         System.out.println("---------------------------------------------------------------------------");
-        System.out.println("Name: " + attributesNPC[0]);
-        System.out.println("Age: " + attributesNPC[1]);
-        System.out.println("Gender: " + attributesNPC[2]);
-        System.out.println("Race: " + attributesNPC[3]);
-        System.out.println("Voice: " + attributesNPC[4]);
-        System.out.println("Location: " + attributesNPC[5]);
-        System.out.println("Category: " + attributesNPC[6]);
+        System.out.println("Name: " + NPCAttributes.name);
+        System.out.println("Age: " + NPCAttributes.age);
+        System.out.println("Gender: " + NPCAttributes.gender);
+        System.out.println("Race: " + NPCAttributes.race);
+        System.out.println("Voice: " + NPCAttributes.voice);
+        System.out.println("Location: " + NPCAttributes.location);
+        System.out.println("Category: " + NPCAttributes.category);
         System.out.println("---------------------------------------------------------------------------");
     }
 
     public static void editNPC(){
-        System.out.println("You've chosen to edit information about " + attributesNPC[0]);
+        System.out.println("You've chosen to edit information about " + NPCAttributes.name);
         System.out.println("---------------------------------------------------------------------------");
         System.out.println("Which attribute would you like to change?");
         changeAttribute = input.nextLine();
         switch (changeAttribute){
             case "Name":
                 System.out.println("What would you like to change their name to?");
-                attributesNPC[0] = input.nextLine();
+                NPCAttributes.name = input.nextLine();
                 break;
             case "Age":
                 System.out.println("How old should they be?");
-                attributesNPC[1] = input.nextLine();
+                NPCAttributes.age = input.nextLine();
                 break;
             case "Gender":
                 System.out.println("What would you like to change their gender to?");
-                attributesNPC[2] = input.nextLine();
+                NPCAttributes.gender = input.nextLine();
                 break;
             case "Race":
                 System.out.println("What race should they be?");
-                attributesNPC[3] = input.nextLine();
+                NPCAttributes.race = input.nextLine();
                 break;
             case "Voice":
                 System.out.println("How should they sound?");
-                attributesNPC[4] = input.nextLine();
+                NPCAttributes.voice = input.nextLine();
                 break;
             case "Location":
                 System.out.println("Where should they be?");
-                attributesNPC[5] = input.nextLine();
+                NPCAttributes.location = input.nextLine();
                 break;
             case "Category":
                 System.out.println("What category of NPC should they fall under?");
-                attributesNPC[6] = input.nextLine();
+                NPCAttributes.category = input.nextLine();
                 break;
         }
         System.out.println("---------------------------------------------------------------------------");
