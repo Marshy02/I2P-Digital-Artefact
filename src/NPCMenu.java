@@ -98,7 +98,6 @@ public class NPCMenu {
     public void ReadNPC(){
         System.out.println("---------------------------------------------------------------------------");
         System.out.println("Which NPC would you like to view details about?");
-        //try{
         String npcName = input.nextLine();
         FileIO readNPC = new FileIO();
         NonPlayerCharacter displayNPC = readNPC.LoadNPCData(npcName);
@@ -111,9 +110,6 @@ public class NPCMenu {
         System.out.println("Location: " + displayNPC.GetLocation());
         System.out.println("Category: " + displayNPC.GetCategory());
         System.out.println("---------------------------------------------------------------------------");
-        //}catch(NPCDoesNotExist e){
-            //System.err.println(e.getMessage());
-        //}
     }
 
     public void dndPun(){

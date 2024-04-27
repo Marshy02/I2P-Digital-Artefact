@@ -9,7 +9,6 @@ public class NonPlayerCharacter {
     private String _voice;
     private String _location;
     private String _category;
-    public static ArrayList<NonPlayerCharacter> allNPCs = new ArrayList<>();
 
     private Scanner input = new Scanner(System.in);
 
@@ -54,19 +53,5 @@ public class NonPlayerCharacter {
         _category = input.nextLine();
         System.out.println("---------------------------------------------------------------------------");
         System.out.println("Reached NPC Constructor 2");
-    }
-
-    public void PrintDetails(){
-        System.out.println("You've selected to view details about " + _name);
-        System.out.println("---------------------------------------------------------------------------");
-        System.out.println("Name: " + _name);
-        System.out.println("Age: " + _age);
-        System.out.println("Gender: " + _gender);
-        System.out.println("Race: " + _race);
-        System.out.println("Voice: " + _voice);
-        System.out.println("Location: " + _location);
-        System.out.println("Category: " + _category);
-        System.out.println("---------------------------------------------------------------------------");
-        System.out.println("Reached NPC Details Printer");
     }
 }

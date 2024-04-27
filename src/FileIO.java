@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.ArrayList;
 public class FileIO {
     public static final String DIRECTORY_NON_PLAYER_CHARACTERS = "src" + File.separator + "Characters";
 
@@ -28,43 +27,6 @@ public class FileIO {
             fileWriter.close();
         }catch(IOException e){
             System.err.println(e.getMessage());
-        }
-    }
-
-    public static ArrayList<NonPlayerCharacter> AccessNPCDetails(){
-        ArrayList<NonPlayerCharacter> NPCs = new ArrayList<>();
-
-        File directory = new File(DIRECTORY_NON_PLAYER_CHARACTERS);
-        File[] files = directory.listFiles();
-
-        if(files == null){
-            System.err.println("Directory does not exist or couldn't be read.");
-            return NPCs;
-        }
-
-        try{
-            for(File file : files)
-            {
-                System.out.println("Trying to Read and fill ArrayList");
-                FileReader fileReader = new FileReader(file);
-                BufferedReader bufferedReader = new BufferedReader(fileReader);
-
-                String name = bufferedReader.readLine();
-                String age = bufferedReader.readLine();
-                String gender = bufferedReader.readLine();
-                String race = bufferedReader.readLine();
-                String voice = bufferedReader.readLine();
-                String location = bufferedReader.readLine();
-                String category = bufferedReader.readLine();
-
-                NonPlayerCharacter NPC = new NonPlayerCharacter(name, age, gender, race, voice, location, category);
-                NPCs.add(NPC);
-                bufferedReader.close();
-            }
-            return NPCs;
-        }catch(IOException e){
-            System.err.println(e.getMessage());
-            return null;
         }
     }
 
