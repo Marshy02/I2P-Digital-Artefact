@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class NonPlayerCharacter {
@@ -9,8 +8,6 @@ public class NonPlayerCharacter {
     private String _voice;
     private String _location;
     private String _category;
-
-    private Scanner input = new Scanner(System.in);
 
     //Getters
     public String GetName() { return _name; }
@@ -33,6 +30,7 @@ public class NonPlayerCharacter {
     }
 
     public NonPlayerCharacter(){
+        Scanner input = new Scanner(System.in);
         System.out.println("You've selected to build an NPC, please provide some information about them");
         System.out.println("---------------------------------------------------------------------------");
         System.out.println("What is this character's name?");
