@@ -1,12 +1,8 @@
-import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
-class DigitalArtefactMenu{
-    private static Scanner input = new Scanner(System.in);
-    //Declare global variables that can be used multiple times
-    //NPC Object
-    private static NonPlayerCharacter NPCAttributes = new NonPlayerCharacter();
-
-    public static void main(String[] args){
+import java.util.*;
+public class NPCMenu {
+    Scanner input = new Scanner(System.in);
+    public void DisplayMenu(){
         System.out.println("Hello and welcome to your D&D NPC Builder and Tracker!");
 
         //Get the user to pick an option from the menu
@@ -16,24 +12,31 @@ class DigitalArtefactMenu{
             System.out.println("""
                     Please select one of the following options:
                     OPTION 1 - Create a new Non-Player Character
-                    OPTION 2 - View information about your NPC
-                    OPTION 3 - Edit information about your NPC
-                    OPTION 4 - Hear a bad D&D themed pun""");
+                    OPTION 2 - View information about an NPC
+                    OPTION 3 - Edit information about an NPC
+                    OPTION 4 - Delete an NPC
+                    OPTION 5 - Hear a bad D&D themed pun""");
             int userChoice = input.nextInt();
             input.nextLine();
 
-            if (0 < userChoice && userChoice < 5) {     //Validate the menu option chosen is between 1 and 4
+            if (0 < userChoice && userChoice < 6) {     //Validate the menu option chosen is between 1 and 4
+                NonPlayerCharacter npcDetails;
                 switch (userChoice) {
                     case 1:                             //Allow the user to build an NPC
-                        createNPC();
+                        npcDetails = new NonPlayerCharacter();
+                        System.out.println("Choice 1, NPC made: " + npcDetails);
+                        FileIO.WriteToFile(npcDetails);
                         break;
                     case 2:                             //Display attributes of a built NPC
-                        readNPC();
+                        ReadNPC();
                         break;
                     case 3:                             //Amend attributes of an NPC
-                        editNPC();
+                        //Read, edit, write NPC file
                         break;
                     case 4:                             //Display one of three bad puns for the user
+                        //Delete NPC file
+                        break;
+                    case 5:                             //Display one of three bad puns for the user
                         dndPun();
                         break;
                 }
@@ -54,42 +57,7 @@ class DigitalArtefactMenu{
         input.close();
     }
 
-    public static void createNPC(){
-        System.out.println("You've selected to build an NPC, please provide some information about them");
-        System.out.println("---------------------------------------------------------------------------");
-        System.out.println("What is this character's name?");
-        NPCAttributes.name = input.nextLine();
-        System.out.println("How old are they?");
-        NPCAttributes.age = input.nextLine();
-        System.out.println("What is their gender?");
-        NPCAttributes.gender = input.nextLine();
-        System.out.println("What is their race? Please select one of the following options:" +
-                "\nHuman\nElf\nDwarf");
-        NPCAttributes.race = input.nextLine();
-        System.out.println("What do they sound like?");
-        NPCAttributes.voice = input.nextLine();
-        System.out.println("Where will they be first encountered?");
-        NPCAttributes.location = input.nextLine();
-        System.out.println("What category do they fall under? Please select one of the following options:" +
-                "\nAllies\nEnemies\nService Providers\nQuest Givers\nNeutral Parties");
-        NPCAttributes.category = input.nextLine();
-        System.out.println("---------------------------------------------------------------------------");
-    }
-
-    public static void readNPC(){
-        System.out.println("You've selected to view details about " + NPCAttributes.name);
-        System.out.println("---------------------------------------------------------------------------");
-        System.out.println("Name: " + NPCAttributes.name);
-        System.out.println("Age: " + NPCAttributes.age);
-        System.out.println("Gender: " + NPCAttributes.gender);
-        System.out.println("Race: " + NPCAttributes.race);
-        System.out.println("Voice: " + NPCAttributes.voice);
-        System.out.println("Location: " + NPCAttributes.location);
-        System.out.println("Category: " + NPCAttributes.category);
-        System.out.println("---------------------------------------------------------------------------");
-    }
-
-    public static void editNPC(){
+    /*public static void editNPC(){
         System.out.println("You've chosen to edit information about " + NPCAttributes.name);
         System.out.println("---------------------------------------------------------------------------");
         System.out.println("Which attribute would you like to change?");
@@ -125,9 +93,30 @@ class DigitalArtefactMenu{
                 break;
         }
         System.out.println("---------------------------------------------------------------------------");
+    }*/
+
+    public void ReadNPC(){
+        System.out.println("---------------------------------------------------------------------------");
+        System.out.println("Which NPC would you like to view details about?");
+        //try{
+        String npcName = input.nextLine();
+        FileIO readNPC = new FileIO();
+        NonPlayerCharacter displayNPC = readNPC.LoadNPCData(npcName);
+        System.out.println("You've selected to view details about " + npcName);
+        System.out.println("Name: " + displayNPC.GetName());
+        System.out.println("Age: " + displayNPC.GetAge());
+        System.out.println("Gender: " + displayNPC.GetGender());
+        System.out.println("Race: " + displayNPC.GetRace());
+        System.out.println("Voice: " + displayNPC.GetVoice());
+        System.out.println("Location: " + displayNPC.GetLocation());
+        System.out.println("Category: " + displayNPC.GetCategory());
+        System.out.println("---------------------------------------------------------------------------");
+        //}catch(NPCDoesNotExist e){
+            //System.err.println(e.getMessage());
+        //}
     }
 
-    public static void dndPun(){
+    public void dndPun(){
         int randomPun = ThreadLocalRandom.current().nextInt(1, 3 + 1);
         switch (randomPun) {
             case 1:
