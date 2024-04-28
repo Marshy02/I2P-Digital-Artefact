@@ -2,8 +2,11 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.*;
 public class NPCMenu {
     Scanner input = new Scanner(System.in);
+    FileIO readNPC = new FileIO();
     public void DisplayMenu(){
         System.out.println("Hello and welcome to your D&D NPC Builder and Tracker!");
+        System.out.println("---------------------------------------------------------------------------");
+
 
         //Get the user to pick an option from the menu
         //Loop the user until they wish to exit the system
@@ -24,20 +27,21 @@ public class NPCMenu {
                 switch (userChoice) {
                     case 1:                             //Allow the user to build an NPC
                         npcDetails = new NonPlayerCharacter();
-                        System.out.println("Choice 1, NPC made: " + npcDetails);
                         FileIO.WriteToFile(npcDetails);
                         break;
                     case 2:                             //Display attributes of a built NPC
                         ReadNPC();
                         break;
                     case 3:                             //Amend attributes of an NPC
-                        //Read, edit, write NPC file
+                        EditNPC();
                         break;
-                    case 4:                             //Display one of three bad puns for the user
+                    case 4:                             //Delete an NPC from file
                         //Delete NPC file
                         break;
                     case 5:                             //Display one of three bad puns for the user
+                        System.out.println("---------------------------------------------------------------------------");
                         dndPun();
+                        System.out.println("---------------------------------------------------------------------------");
                         break;
                 }
                 do {                                    //Loop until the user answers Yes or No, accepting similar formats
@@ -57,51 +61,50 @@ public class NPCMenu {
         input.close();
     }
 
-    /*public static void editNPC(){
-        System.out.println("You've chosen to edit information about " + NPCAttributes.name);
+    public void EditNPC(){
+        NonPlayerCharacter editNPC = readNPC.LoadNPCData();
         System.out.println("---------------------------------------------------------------------------");
+        System.out.println("You've chosen to edit information about " + editNPC.GetName());
         System.out.println("Which attribute would you like to change?");
         String changeAttribute = input.nextLine();
         switch (changeAttribute){
             case "Name":
                 System.out.println("What would you like to change their name to?");
-                NPCAttributes.name = input.nextLine();
+                editNPC.SetName(input.nextLine());
                 break;
             case "Age":
                 System.out.println("How old should they be?");
-                NPCAttributes.age = input.nextLine();
+                editNPC.SetAge(input.nextLine());
                 break;
             case "Gender":
                 System.out.println("What would you like to change their gender to?");
-                NPCAttributes.gender = input.nextLine();
+                editNPC.SetGender(input.nextLine());
                 break;
             case "Race":
                 System.out.println("What race should they be?");
-                NPCAttributes.race = input.nextLine();
+                editNPC.SetRace(input.nextLine());
                 break;
             case "Voice":
                 System.out.println("How should they sound?");
-                NPCAttributes.voice = input.nextLine();
+                editNPC.SetVoice(input.nextLine());
                 break;
             case "Location":
                 System.out.println("Where should they be?");
-                NPCAttributes.location = input.nextLine();
+                editNPC.SetLocation(input.nextLine());
                 break;
             case "Category":
                 System.out.println("What category of NPC should they fall under?");
-                NPCAttributes.category = input.nextLine();
+                editNPC.SetCategory(input.nextLine());
                 break;
         }
+        FileIO.WriteToFile(editNPC);
         System.out.println("---------------------------------------------------------------------------");
-    }*/
+    }
 
     public void ReadNPC(){
+        NonPlayerCharacter displayNPC = readNPC.LoadNPCData();
         System.out.println("---------------------------------------------------------------------------");
-        System.out.println("Which NPC would you like to view details about?");
-        String npcName = input.nextLine();
-        FileIO readNPC = new FileIO();
-        NonPlayerCharacter displayNPC = readNPC.LoadNPCData(npcName);
-        System.out.println("You've selected to view details about " + npcName);
+        System.out.println("You've selected to view details about " + displayNPC.GetName());
         System.out.println("Name: " + displayNPC.GetName());
         System.out.println("Age: " + displayNPC.GetAge());
         System.out.println("Gender: " + displayNPC.GetGender());

@@ -1,8 +1,9 @@
 import java.util.Scanner;
 
 public class NonPlayerCharacter {
+    //Object variables for NPCs as String
     private String _name;
-    private String _age;
+    private String _age;                                //Age as String due to no calculations placed on it
     private String _gender;
     private String _race;
     private String _voice;
@@ -18,6 +19,15 @@ public class NonPlayerCharacter {
     public String GetLocation() { return _location; }
     public String GetCategory() { return _category; }
 
+    //Setters
+    public void SetName(String name) { _name = name; }
+    public void SetAge(String age) { _age = age; }
+    public void SetGender(String gender) { _gender = gender; }
+    public void SetRace(String race) { _race = race; }
+    public void SetVoice(String voice) { _voice = voice; }
+    public void SetLocation(String location) { _location = location; }
+    public void SetCategory(String category) { _category = category; }
+
     public NonPlayerCharacter(String name, String age, String gender, String race, String voice, String location, String category){
         _name = name;
         _age = age;
@@ -26,7 +36,6 @@ public class NonPlayerCharacter {
         _voice = voice;
         _location = location;
         _category = category;
-        System.out.println("Reached NPC Constructor 1");
     }
 
     public NonPlayerCharacter(){
@@ -50,6 +59,5 @@ public class NonPlayerCharacter {
                 "\nAllies\nEnemies\nService Providers\nQuest Givers\nNeutral Parties");
         _category = input.nextLine();
         System.out.println("---------------------------------------------------------------------------");
-        System.out.println("Reached NPC Constructor 2");
     }
 }

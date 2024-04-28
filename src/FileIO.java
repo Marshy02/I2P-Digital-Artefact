@@ -1,17 +1,15 @@
 import java.io.*;
+import java.util.Scanner;
 public class FileIO {
     public static final String DIRECTORY_NON_PLAYER_CHARACTERS = "src" + File.separator + "Characters";
 
     public static void WriteToFile(NonPlayerCharacter npc){
-        System.out.println("Reached WriteToFile");
         String fileName = npc.GetName() + ".txt";
         File file = new File( DIRECTORY_NON_PLAYER_CHARACTERS, fileName);
-        System.out.println("File to Write to: " + file);
 
         file.getParentFile().mkdirs();
 
         try{
-            System.out.println("Reached Try to Write");
             FileWriter fileWriter = new FileWriter(file);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
@@ -30,11 +28,14 @@ public class FileIO {
         }
     }
 
-    public static NonPlayerCharacter LoadNPCData(String npcName){
-        System.out.println("Reached LoadNPCData");
+    public static NonPlayerCharacter LoadNPCData(){
+        Scanner input = new Scanner(System.in);
+        System.out.println("---------------------------------------------------------------------------");
+        System.out.println("Which NPC would you like to view details about?");
+        String npcName = input.nextLine();
+
         String fileName = DIRECTORY_NON_PLAYER_CHARACTERS + File.separator + npcName + ".txt";
         File file = new File(fileName);
-        System.out.println("File to Read: " + fileName + " - " + file);
 
         if (!file.exists()){
             System.err.println("File does not exist or could not be read");
@@ -42,7 +43,6 @@ public class FileIO {
         }
 
         try{
-            System.out.println("Trying to Read in LoadNPCData");
             FileReader fileReader = new FileReader(file);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
