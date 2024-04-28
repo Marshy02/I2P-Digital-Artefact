@@ -30,7 +30,6 @@ public class FileIO {
     }
 
     public static NonPlayerCharacter LoadNPCData(){
-        System.out.println("---------------------------------------------------------------------------");
         System.out.println("Which NPC would you like to view details about?");
         String npcName = input.nextLine();
 
@@ -76,6 +75,7 @@ public class FileIO {
         }
         else {                                          //Continue if NPC file exists
             System.out.println("You've chosen to delete " + npcName + ", are you sure?");
+            System.out.println("---------------------------------------------------------------------------");
             do {                                        //Loop until the user answers DELETE or CANCEL
                 System.out.println("Please type DELETE to confirm or CANCEL to back out");
                 confirmDelete = input.nextLine();

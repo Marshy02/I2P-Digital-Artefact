@@ -58,6 +58,5 @@ public class NonPlayerCharacter {
         System.out.println("What category do they fall under? Please select one of the following options:" +
                 "\nAllies\nEnemies\nService Providers\nQuest Givers\nNeutral Parties");
         _category = input.nextLine();
-        System.out.println("---------------------------------------------------------------------------");
     }
 }

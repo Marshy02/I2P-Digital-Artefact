@@ -26,14 +26,20 @@ public class NPCMenu {
                 NonPlayerCharacter npcDetails;
                 switch (userChoice) {
                     case 1:                             //Allow the user to build an NPC
+                        System.out.println("---------------------------------------------------------------------------");
                         npcDetails = new NonPlayerCharacter();
                         FileIO.WriteToFile(npcDetails);
+                        System.out.println("---------------------------------------------------------------------------");
                         break;
                     case 2:                             //Display attributes of a built NPC
+                        System.out.println("---------------------------------------------------------------------------");
                         ReadNPC();
+                        System.out.println("---------------------------------------------------------------------------");
                         break;
                     case 3:                             //Amend attributes of an NPC
+                        System.out.println("---------------------------------------------------------------------------");
                         EditNPC();
+                        System.out.println("---------------------------------------------------------------------------");
                         break;
                     case 4:                             //Delete an NPC from file
                         System.out.println("---------------------------------------------------------------------------");
@@ -65,8 +71,8 @@ public class NPCMenu {
 
     public void EditNPC(){
         NonPlayerCharacter editNPC = readNPC.LoadNPCData();
-        System.out.println("---------------------------------------------------------------------------");
         System.out.println("You've chosen to edit information about " + editNPC.GetName());
+        System.out.println("---------------------------------------------------------------------------");
         System.out.println("Which attribute would you like to change?");
         String changeAttribute = input.nextLine();
         switch (changeAttribute){
@@ -100,13 +106,12 @@ public class NPCMenu {
                 break;
         }
         FileIO.WriteToFile(editNPC);
-        System.out.println("---------------------------------------------------------------------------");
     }
 
     public void ReadNPC(){
         NonPlayerCharacter displayNPC = readNPC.LoadNPCData();
-        System.out.println("---------------------------------------------------------------------------");
         System.out.println("You've selected to view details about " + displayNPC.GetName());
+        System.out.println("---------------------------------------------------------------------------");
         System.out.println("Name: " + displayNPC.GetName());
         System.out.println("Age: " + displayNPC.GetAge());
         System.out.println("Gender: " + displayNPC.GetGender());
@@ -114,7 +119,6 @@ public class NPCMenu {
         System.out.println("Voice: " + displayNPC.GetVoice());
         System.out.println("Location: " + displayNPC.GetLocation());
         System.out.println("Category: " + displayNPC.GetCategory());
-        System.out.println("---------------------------------------------------------------------------");
     }
 
     public void dndPun(){
