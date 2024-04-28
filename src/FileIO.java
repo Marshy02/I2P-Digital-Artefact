@@ -2,6 +2,7 @@ import java.io.*;
 import java.util.Scanner;
 public class FileIO {
     public static final String DIRECTORY_NON_PLAYER_CHARACTERS = "src" + File.separator + "Characters";
+    public static Scanner input = new Scanner(System.in);
 
     public static void WriteToFile(NonPlayerCharacter npc){
         String fileName = npc.GetName() + ".txt";
@@ -29,7 +30,6 @@ public class FileIO {
     }
 
     public static NonPlayerCharacter LoadNPCData(){
-        Scanner input = new Scanner(System.in);
         System.out.println("---------------------------------------------------------------------------");
         System.out.println("Which NPC would you like to view details about?");
         String npcName = input.nextLine();
@@ -60,6 +60,38 @@ public class FileIO {
         }catch(IOException | NumberFormatException e){
             System.err.println(e.getMessage());
             return null;
+        }
+    }
+
+    public static void DeleteNPCFile(){
+        System.out.println("Which NPC would you like to delete?");
+        String npcName = input.nextLine();
+        String confirmDelete;
+
+        String fileName = DIRECTORY_NON_PLAYER_CHARACTERS + File.separator + npcName + ".txt";
+        File file = new File(fileName);
+
+        if (!file.exists()){                            //Check NPC is saved
+            System.err.println("File does not exist or could not be read");
+        }
+        else {                                          //Continue if NPC file exists
+            System.out.println("You've chosen to delete " + npcName + ", are you sure?");
+            do {                                        //Loop until the user answers DELETE or CANCEL
+                System.out.println("Please type DELETE to confirm or CANCEL to back out");
+                confirmDelete = input.nextLine();
+            }
+            while(!(confirmDelete.equals("DELETE")) && !(confirmDelete.equals("CANCEL")));
+
+            if (confirmDelete.equals("DELETE")) {       //Tries to delete NPC file if user selects DELETE
+                if (file.delete()) {
+                    System.out.println("Deleted " + file.getName());
+                } else {
+                    System.out.println("Failed to delete " + file.getName());
+                }
+            }
+            else{                                       //Exits if user selects CANCEL
+                System.out.println("Delete cancelled, " + npcName + " is still saved");
+            }
         }
     }
 }

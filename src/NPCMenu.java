@@ -36,7 +36,9 @@ public class NPCMenu {
                         EditNPC();
                         break;
                     case 4:                             //Delete an NPC from file
-                        //Delete NPC file
+                        System.out.println("---------------------------------------------------------------------------");
+                        FileIO.DeleteNPCFile();
+                        System.out.println("---------------------------------------------------------------------------");
                         break;
                     case 5:                             //Display one of three bad puns for the user
                         System.out.println("---------------------------------------------------------------------------");
