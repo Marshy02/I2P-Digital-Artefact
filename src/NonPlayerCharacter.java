@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class NonPlayerCharacter {
-    //Object variables for NPCs as String
+                                                        //Object variables for NPCs as String
     private String _name;
     private String _age;                                //Age as String due to no calculations placed on it
     private String _gender;
@@ -10,7 +10,7 @@ public class NonPlayerCharacter {
     private String _location;
     private String _category;
 
-    //Getters
+                                                        //Getters
     public String GetName() { return _name; }
     public String GetAge() { return _age; }
     public String GetGender() { return _gender; }
@@ -19,7 +19,7 @@ public class NonPlayerCharacter {
     public String GetLocation() { return _location; }
     public String GetCategory() { return _category; }
 
-    //Setters
+                                                        //Setters
     public void SetName(String name) { _name = name; }
     public void SetAge(String age) { _age = age; }
     public void SetGender(String gender) { _gender = gender; }
@@ -28,6 +28,7 @@ public class NonPlayerCharacter {
     public void SetLocation(String location) { _location = location; }
     public void SetCategory(String category) { _category = category; }
 
+                                                        //Constructor consuming attributes
     public NonPlayerCharacter(String name, String age, String gender, String race, String voice, String location, String category){
         _name = name;
         _age = age;
@@ -38,6 +39,7 @@ public class NonPlayerCharacter {
         _category = category;
     }
 
+                                                        //Constructor prompting the user for inputs
     public NonPlayerCharacter(){
         Scanner input = new Scanner(System.in);
         System.out.println("You've selected to build an NPC, please provide some information about them");

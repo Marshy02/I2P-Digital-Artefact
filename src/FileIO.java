@@ -1,16 +1,17 @@
 import java.io.*;
 import java.util.Scanner;
 public class FileIO {
+                                                        //Declare folder for storing saved NPC files
     public static final String DIRECTORY_NON_PLAYER_CHARACTERS = "src" + File.separator + "Characters";
     public static Scanner input = new Scanner(System.in);
 
     public static void WriteToFile(NonPlayerCharacter npc){
-        String fileName = npc.GetName() + ".txt";
+        String fileName = npc.GetName() + ".txt";       //Generate a file using the inputted NPC's name
         File file = new File( DIRECTORY_NON_PLAYER_CHARACTERS, fileName);
 
-        file.getParentFile().mkdirs();
+        file.getParentFile().mkdirs();                  //Creates a new Characters directory if one does not exist
 
-        try{
+        try{                                            //Try to write each NPC attribute as a separate line in a text file
             FileWriter fileWriter = new FileWriter(file);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
@@ -24,7 +25,7 @@ public class FileIO {
 
             bufferedWriter.close();
             fileWriter.close();
-        }catch(IOException e){
+        }catch(IOException e){                          //Catch any Input/Output errors
             System.err.println(e.getMessage());
         }
     }
@@ -34,14 +35,14 @@ public class FileIO {
         String npcName = input.nextLine();
 
         String fileName = DIRECTORY_NON_PLAYER_CHARACTERS + File.separator + npcName + ".txt";
-        File file = new File(fileName);
+        File file = new File(fileName);                 //Designates a file to check based on user's input
 
-        if (!file.exists()){
+        if (!file.exists()){                            //Checks if the file exists and errors out if not
             System.err.println("File does not exist or could not be read");
             return null;
         }
 
-        try{
+        try{                                            //Try to read each line of a found text file and assign them to NPC attributes
             FileReader fileReader = new FileReader(file);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
@@ -56,7 +57,7 @@ public class FileIO {
             bufferedReader.close();
 
             return new NonPlayerCharacter(name, age, gender, race, voice, location, category);
-        }catch(IOException | NumberFormatException e){
+        }catch(IOException | NumberFormatException e){  //Catch Input/Output and Integer errors
             System.err.println(e.getMessage());
             return null;
         }
@@ -68,7 +69,7 @@ public class FileIO {
         String confirmDelete;
 
         String fileName = DIRECTORY_NON_PLAYER_CHARACTERS + File.separator + npcName + ".txt";
-        File file = new File(fileName);
+        File file = new File(fileName);                 //Designates a file to check based on user's input
 
         if (!file.exists()){                            //Check NPC is saved
             System.err.println("File does not exist or could not be read");
