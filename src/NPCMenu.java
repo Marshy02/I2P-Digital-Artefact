@@ -1,3 +1,4 @@
+import java.io.File;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.*;
 import static java.lang.Integer.parseInt;
@@ -99,8 +100,17 @@ public class NPCMenu {
 
         switch (changeAttribute){                       //Allow the user to change a chosen attribute
             case "Name":
-                System.out.println("What would you like to change their name to?");
-                editNPC.SetName(input.nextLine());
+                String fileName = FileIO.DIRECTORY_NON_PLAYER_CHARACTERS + File.separator + editNPC.GetName() + ".txt";
+                File file = new File(fileName);
+                file.delete();                          //Delete file with old name so duplicates are not stored under multiple names
+
+                String tempName;
+                do{                                     //Loop the user to prevent null value input
+                    System.out.println("What would you like to change their name to?");
+                    tempName = input.nextLine();
+                } while(tempName.isEmpty());
+
+                editNPC.SetName(tempName);
                 break;
             case "Age":
                 do{                                     //Loop the user until a valid age is inputted
@@ -114,8 +124,13 @@ public class NPCMenu {
                 editNPC.SetAge(tempAge);
                 break;
             case "Gender":
-                System.out.println("What would you like to change their gender to?");
-                editNPC.SetGender(input.nextLine());
+                String tempGender;
+                do{                                     //Loop the user to prevent null value input
+                    System.out.println("What would you like to change their gender to?");
+                    tempGender = input.nextLine();
+                } while(tempGender.isEmpty());
+
+                editNPC.SetGender(tempGender);
                 break;
             case "Race":
                 do{                                     //Loop the user until a valid race is inputted
@@ -126,12 +141,22 @@ public class NPCMenu {
                 editNPC.SetRace(tempRace);
                 break;
             case "Voice":
-                System.out.println("How should they sound?");
-                editNPC.SetVoice(input.nextLine());
+                String tempVoice;
+                do{                                     //Loop the user to prevent null value input
+                    System.out.println("How should they sound?");
+                    tempVoice = input.nextLine();
+                } while (tempVoice.isEmpty());
+
+                editNPC.SetVoice(tempVoice);
                 break;
             case "Location":
-                System.out.println("Where should they be?");
-                editNPC.SetLocation(input.nextLine());
+                String tempLocation;
+                do{                                     //Loop the user to prevent null value input
+                    System.out.println("Where should they be?");
+                    tempLocation = input.nextLine();
+                } while(tempLocation.isEmpty());
+
+                editNPC.SetLocation(tempLocation);
                 break;
             case "Category":
                 do{                                     //Loop the user until a valid category is inputted

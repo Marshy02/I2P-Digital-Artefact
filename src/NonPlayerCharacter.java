@@ -46,44 +46,46 @@ public class NonPlayerCharacter {
         System.out.println("You've selected to build an NPC, please provide some information about them");
         System.out.println("---------------------------------------------------------------------------");
 
-        System.out.println("What is this character's name?");
-        _name = input.nextLine();
+        do{                                             //Loop the user until any value is inputted
+            System.out.println("What is this character's name?");
+            _name = input.nextLine();
+        } while(_name.isEmpty());
 
-        int tempAge = 0;
         do{                                             //Loop the user until a valid age is inputted
             try{
                 System.out.println("How old are they?");
-                tempAge = parseInt(input.nextLine());
+                _age = parseInt(input.nextLine());
             } catch(NumberFormatException e) {          //Displays a meaningful error message if the user enters anything but a number
                 System.err.println(e.getMessage() + "\nAge will be set to 0, please add a valid age in OPTION 3 - Edit information about an NPC");
             }
-        } while(tempAge < 0);
-        _age = tempAge;
+        } while(_age < 0 );
 
-        System.out.println("What is their gender?");
-        _gender = input.nextLine();
+        do{                                             //Loop the user until any value is inputted
+            System.out.println("What is their gender?");
+            _gender = input.nextLine();
+        } while(_gender.isEmpty());
 
-        String tempRace;
         do{                                             //Loop the user until a valid race is inputted
             System.out.println("What is their race? Please select one of the following options:" +
                     "\nHuman\nElf\nDwarf");
-            tempRace = input.nextLine();
-        } while(!(tempRace.equals("Human")) && !(tempRace.equals("Elf")) && !(tempRace.equals("Dwarf")));
-        _race = tempRace;
+            _race = input.nextLine();
+        } while(!(_race.equals("Human")) && !(_race.equals("Elf")) && !(_race.equals("Dwarf")));
 
-        System.out.println("What do they sound like?");
-        _voice = input.nextLine();
+        do{                                             //Loop the user until any value is inputted
+            System.out.println("What do they sound like?");
+            _voice = input.nextLine();
+        } while(_voice.isEmpty());
 
-        System.out.println("Where will they be first encountered?");
-        _location = input.nextLine();
+        do{                                             //Loop the user until any value is inputted
+            System.out.println("Where will they be first encountered?");
+            _location = input.nextLine();
+        } while(_location.isEmpty());
 
-        String tempCategory;
-        do{                                                //Loop the user until a valid category is inputted
+        do{                                             //Loop the user until a valid category is inputted
             System.out.println("What category do they fall under? Please select one of the following options:" +
                     "\nAllies\nEnemies\nService Providers\nQuest Givers\nNeutral Parties");
-            tempCategory = input.nextLine();
-        } while(!(tempCategory.equals("Allies")) && !(tempCategory.equals("Enemies")) && !(tempCategory.equals("Service Providers"))
-                && !(tempCategory.equals("Quest Givers")) && !(tempCategory.equals("Neutral Parties")));
-        _category = tempCategory;
+            _category = input.nextLine();
+        } while(!(_category.equals("Allies")) && !(_category.equals("Enemies")) && !(_category.equals("Service Providers"))
+                && !(_category.equals("Quest Givers")) && !(_category.equals("Neutral Parties")));
     }
 }

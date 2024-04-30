@@ -33,8 +33,11 @@ public class FileIO {
     }
 
     public static NonPlayerCharacter LoadNPCData(){
-        System.out.println("Which NPC would you like to view details about?");
-        String npcName = input.nextLine();
+        String npcName;
+        do{                                             //Loop the user until any value is inputted
+            System.out.println("Which NPC would you like to view details about?");
+            npcName = input.nextLine();
+        } while(npcName.isEmpty());
 
         String fileName = DIRECTORY_NON_PLAYER_CHARACTERS + File.separator + npcName + ".txt";
         File file = new File(fileName);                 //Designates a file to check based on user's input
@@ -66,9 +69,12 @@ public class FileIO {
     }
 
     public static void DeleteNPCFile(){
-        System.out.println("Which NPC would you like to delete?");
-        String npcName = input.nextLine();
         String confirmDelete;
+        String npcName;
+        do{                                             //Loop the user until any value is inputted
+            System.out.println("Which NPC would you like to delete?");
+            npcName = input.nextLine();
+        } while(npcName.isEmpty());
 
         String fileName = DIRECTORY_NON_PLAYER_CHARACTERS + File.separator + npcName + ".txt";
         File file = new File(fileName);                 //Designates a file to check based on user's input
