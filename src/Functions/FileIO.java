@@ -20,22 +20,27 @@ public class FileIO {
 
         file.getParentFile().mkdirs();                  //Creates a new Characters directory if one does not exist
 
-        try{                                            //Try to write each NPC attribute as a separate line in a text file
-            FileWriter fileWriter = new FileWriter(file);
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        if(file.exists()) {                             //Check if file already exists
+            System.err.println("An NPC under the name " + npc.GetName() + " already exists, please try again with a new name or edit this file with OPTION 3 - Edit information about an NPC");
+        }
+        else {
+            try {                                        //Try to write each NPC attribute as a separate line in a text file
+                FileWriter fileWriter = new FileWriter(file);
+                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
-            bufferedWriter.write(npc.GetName() + "\n");
-            bufferedWriter.write(npc.GetAge() + "\n");
-            bufferedWriter.write(npc.GetGender() + "\n");
-            bufferedWriter.write(npc.GetRace() + "\n");
-            bufferedWriter.write(npc.GetVoice() + "\n");
-            bufferedWriter.write(npc.GetLocation() + "\n");
-            bufferedWriter.write(npc.GetCategory() + "\n");
+                bufferedWriter.write(npc.GetName() + "\n");
+                bufferedWriter.write(npc.GetAge() + "\n");
+                bufferedWriter.write(npc.GetGender() + "\n");
+                bufferedWriter.write(npc.GetRace() + "\n");
+                bufferedWriter.write(npc.GetVoice() + "\n");
+                bufferedWriter.write(npc.GetLocation() + "\n");
+                bufferedWriter.write(npc.GetCategory() + "\n");
 
-            bufferedWriter.close();
-            fileWriter.close();
-        }catch(IOException e){                          //Catch any Input/Output errors
-            System.err.println(e.getMessage());
+                bufferedWriter.close();
+                fileWriter.close();
+            } catch (IOException e) {                          //Catch any Input/Output errors
+                System.err.println(e.getMessage());
+            }
         }
     }
 
