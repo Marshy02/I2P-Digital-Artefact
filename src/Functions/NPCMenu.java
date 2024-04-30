@@ -1,11 +1,14 @@
+package Functions;
 import java.io.File;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.*;
 import static java.lang.Integer.parseInt;
+import Objects.NonPlayerCharacter;
 
 public class NPCMenu {
     Scanner input = new Scanner(System.in);
     FileIO readNPC = new FileIO();
+    public static String npcName;
     public void DisplayMenu(){
         System.out.println("Hello and welcome to your D&D NPC Builder and Tracker!");
         System.out.println("---------------------------------------------------------------------------");
@@ -44,7 +47,7 @@ public class NPCMenu {
                         break;
                     case 4:                             //Delete an NPC from file
                         System.out.println("---------------------------------------------------------------------------");
-                        FileIO.DeleteNPCFile();
+                        DeleteNPC();
                         System.out.println("---------------------------------------------------------------------------");
                         break;
                     case 5:                             //Display one of three bad puns for the user
@@ -71,7 +74,12 @@ public class NPCMenu {
     }
 
     public void ReadNPC(){                              //Method for displaying details about a chosen NPC
-        NonPlayerCharacter displayNPC = readNPC.LoadNPCData();
+        npcName = "";
+        do{                                             //Loop the user until any value is inputted
+            System.out.println("Which NPC would you like to view details about?");
+            npcName = input.nextLine();
+        } while(npcName.isEmpty());
+        NonPlayerCharacter displayNPC = readNPC.LoadNPCData(npcName);
         System.out.println("You've selected to view details about " + displayNPC.GetName());
         System.out.println("---------------------------------------------------------------------------");
         System.out.println("Name: " + displayNPC.GetName());
@@ -84,7 +92,12 @@ public class NPCMenu {
     }
 
     public void EditNPC(){                              //Method for editing attributes of a chosen NPC
-        NonPlayerCharacter editNPC = readNPC.LoadNPCData();
+        npcName = "";
+        do{                                             //Loop the user until any value is inputted
+            System.out.println("Which NPC would you like to edit?");
+            npcName = input.nextLine();
+        } while(npcName.isEmpty());
+        NonPlayerCharacter editNPC = readNPC.LoadNPCData(npcName);
         String changeAttribute;
         int tempAge = 0;
         String tempRace;
@@ -169,6 +182,30 @@ public class NPCMenu {
                 break;
         }
         FileIO.WriteToFile(editNPC);                    //Write updated details to selected file
+    }
+
+    public void DeleteNPC(){                            //Method for deleting an NPC
+        npcName = "";
+        String confirmDelete;
+        do{                                             //Loop the user until any value is inputted
+            System.out.println("Which NPC would you like to delete?");
+            npcName = input.nextLine();
+        } while(npcName.isEmpty());
+
+        System.out.println("You've chosen to delete " + npcName + ", are you sure?");
+        System.out.println("---------------------------------------------------------------------------");
+        do {                                            //Loop until the user answers DELETE or CANCEL
+            System.out.println("Please type DELETE to confirm or CANCEL to back out");
+            confirmDelete = input.nextLine();
+        }
+        while(!(confirmDelete.equals("DELETE")) && !(confirmDelete.equals("CANCEL")));
+
+        if (confirmDelete.equals("DELETE")) {           //Tries to delete NPC file if user selects DELETE
+            FileIO.DeleteNPCFile(npcName);
+        }
+        else{                                           //Exits if user selects CANCEL
+            System.out.println("Delete cancelled, " + npcName + " is still saved");
+        }
     }
 
     public void dndPun(){                               //Method for displaying a D&D-themed pun

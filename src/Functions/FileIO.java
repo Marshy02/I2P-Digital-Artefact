@@ -1,3 +1,5 @@
+package Functions;
+import Objects.NonPlayerCharacter;
 import java.io.*;
 import java.util.Scanner;
 import static java.lang.Integer.parseInt;
@@ -9,7 +11,7 @@ public class FileIO {
 
     public static void WriteToFile(NonPlayerCharacter npc){
         String fileName = npc.GetName() + ".txt";       //Generate a file using the inputted NPC's name
-        File file = new File( DIRECTORY_NON_PLAYER_CHARACTERS, fileName);
+        File file = new File(DIRECTORY_NON_PLAYER_CHARACTERS, fileName);
 
         file.getParentFile().mkdirs();                  //Creates a new Characters directory if one does not exist
 
@@ -32,13 +34,7 @@ public class FileIO {
         }
     }
 
-    public static NonPlayerCharacter LoadNPCData(){
-        String npcName;
-        do{                                             //Loop the user until any value is inputted
-            System.out.println("Which NPC would you like to view details about?");
-            npcName = input.nextLine();
-        } while(npcName.isEmpty());
-
+    public static NonPlayerCharacter LoadNPCData(String npcName){
         String fileName = DIRECTORY_NON_PLAYER_CHARACTERS + File.separator + npcName + ".txt";
         File file = new File(fileName);                 //Designates a file to check based on user's input
 
@@ -68,14 +64,7 @@ public class FileIO {
         }
     }
 
-    public static void DeleteNPCFile(){
-        String confirmDelete;
-        String npcName;
-        do{                                             //Loop the user until any value is inputted
-            System.out.println("Which NPC would you like to delete?");
-            npcName = input.nextLine();
-        } while(npcName.isEmpty());
-
+    public static void DeleteNPCFile(String npcName){
         String fileName = DIRECTORY_NON_PLAYER_CHARACTERS + File.separator + npcName + ".txt";
         File file = new File(fileName);                 //Designates a file to check based on user's input
 
@@ -83,23 +72,10 @@ public class FileIO {
             System.err.println("File does not exist or could not be read");
         }
         else {                                          //Continue if NPC file exists
-            System.out.println("You've chosen to delete " + npcName + ", are you sure?");
-            System.out.println("---------------------------------------------------------------------------");
-            do {                                        //Loop until the user answers DELETE or CANCEL
-                System.out.println("Please type DELETE to confirm or CANCEL to back out");
-                confirmDelete = input.nextLine();
-            }
-            while(!(confirmDelete.equals("DELETE")) && !(confirmDelete.equals("CANCEL")));
-
-            if (confirmDelete.equals("DELETE")) {       //Tries to delete NPC file if user selects DELETE
-                if (file.delete()) {
-                    System.out.println("Deleted " + file.getName());
-                } else {
-                    System.out.println("Failed to delete " + file.getName());
-                }
-            }
-            else{                                       //Exits if user selects CANCEL
-                System.out.println("Delete cancelled, " + npcName + " is still saved");
+            if (file.delete()) {
+                System.out.println("Deleted " + file.getName());
+            } else {
+                System.out.println("Failed to delete " + file.getName());
             }
         }
     }
