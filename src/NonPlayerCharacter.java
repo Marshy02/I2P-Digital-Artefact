@@ -50,11 +50,11 @@ public class NonPlayerCharacter {
         _name = input.nextLine();
 
         int tempAge = 0;
-        do{
+        do{                                             //Loop the user until a valid age is inputted
             try{
                 System.out.println("How old are they?");
                 tempAge = parseInt(input.nextLine());
-            } catch(NumberFormatException e) {
+            } catch(NumberFormatException e) {          //Displays a meaningful error message if the user enters anything but a number
                 System.err.println(e.getMessage() + "\nAge will be set to 0, please add a valid age in OPTION 3 - Edit information about an NPC");
             }
         } while(tempAge < 0);
@@ -64,7 +64,7 @@ public class NonPlayerCharacter {
         _gender = input.nextLine();
 
         String tempRace;
-        do{
+        do{                                             //Loop the user until a valid race is inputted
             System.out.println("What is their race? Please select one of the following options:" +
                     "\nHuman\nElf\nDwarf");
             tempRace = input.nextLine();
@@ -78,7 +78,7 @@ public class NonPlayerCharacter {
         _location = input.nextLine();
 
         String tempCategory;
-        do{
+        do{                                                //Loop the user until a valid category is inputted
             System.out.println("What category do they fall under? Please select one of the following options:" +
                     "\nAllies\nEnemies\nService Providers\nQuest Givers\nNeutral Parties");
             tempCategory = input.nextLine();
