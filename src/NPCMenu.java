@@ -84,26 +84,46 @@ public class NPCMenu {
 
     public void EditNPC(){                              //Method for editing attributes of a chosen NPC
         NonPlayerCharacter editNPC = readNPC.LoadNPCData();
+        String changeAttribute;
+        int tempAge = 0;
+        String tempRace;
+        String tempCategory;
         System.out.println("You've chosen to edit information about " + editNPC.GetName());
         System.out.println("---------------------------------------------------------------------------");
-        System.out.println("Which attribute would you like to change?");
-        String changeAttribute = input.nextLine();
+        do{                                             //Loop the user until they select a valid attribute to edit
+            System.out.println("Which attribute would you like to change?");
+            changeAttribute = input.nextLine();
+        } while(!(changeAttribute.equals("Name")) && !(changeAttribute.equals("Age")) && !(changeAttribute.equals("Gender"))
+                && !(changeAttribute.equals("Race")) && !(changeAttribute.equals("Voice"))
+                && !(changeAttribute.equals("Location")) && !(changeAttribute.equals("Category")));
+
         switch (changeAttribute){                       //Allow the user to change a chosen attribute
             case "Name":
                 System.out.println("What would you like to change their name to?");
                 editNPC.SetName(input.nextLine());
                 break;
             case "Age":
-                System.out.println("How old should they be?");
-                editNPC.SetAge(parseInt(input.nextLine()));
+                do{                                     //Loop the user until a valid age is inputted
+                    try{
+                        System.out.println("How old should they be?");
+                        tempAge = parseInt(input.nextLine());
+                    } catch(NumberFormatException e) {  //Displays a meaningful error message if the user enters anything but a number
+                        System.err.println(e.getMessage() + "\nAge will be set to 0, please add a valid age in OPTION 3 - Edit information about an NPC");
+                    }
+                } while(tempAge < 0);
+                editNPC.SetAge(tempAge);
                 break;
             case "Gender":
                 System.out.println("What would you like to change their gender to?");
                 editNPC.SetGender(input.nextLine());
                 break;
             case "Race":
-                System.out.println("What race should they be?");
-                editNPC.SetRace(input.nextLine());
+                do{                                     //Loop the user until a valid race is inputted
+                    System.out.println("What race should they be? Please select one of the following options:" +
+                            "\nHuman\nElf\nDwarf");
+                    tempRace = input.nextLine();
+                } while(!(tempRace.equals("Human")) && !(tempRace.equals("Elf")) && !(tempRace.equals("Dwarf")));
+                editNPC.SetRace(tempRace);
                 break;
             case "Voice":
                 System.out.println("How should they sound?");
@@ -114,8 +134,13 @@ public class NPCMenu {
                 editNPC.SetLocation(input.nextLine());
                 break;
             case "Category":
-                System.out.println("What category of NPC should they fall under?");
-                editNPC.SetCategory(input.nextLine());
+                do{                                     //Loop the user until a valid category is inputted
+                    System.out.println("What category of NPC should they fall under? Please select one of the following options:" +
+                            "\nAllies\nEnemies\nService Providers\nQuest Givers\nNeutral Parties");
+                    tempCategory = input.nextLine();
+                } while(!(tempCategory.equals("Allies")) && !(tempCategory.equals("Enemies")) && !(tempCategory.equals("Service Providers"))
+                        && !(tempCategory.equals("Quest Givers")) && !(tempCategory.equals("Neutral Parties")));
+                editNPC.SetCategory(tempCategory);
                 break;
         }
         FileIO.WriteToFile(editNPC);                    //Write updated details to selected file
