@@ -173,15 +173,16 @@ public class NPCMenu {
 
     public void dndPun(){                               //Method for displaying a D&D-themed pun
         int randomPun = ThreadLocalRandom.current().nextInt(1, 3 + 1);
+        String[] puns = {"Why do paladins prefer chain mail? Because it’s holey armor.", "Why do rogues prefer leather armor? Because it’s made of Hide.", "I once heard of a Druid who could wield swords while using wild shape. She had a right to bear arms."};
         switch (randomPun) {                            //Outputs one of three puns at random
             case 1:
-                System.out.println("Why do paladins prefer chain mail? Because it’s holey armor.");
+                System.out.println(puns[0]);
                 break;
             case 2:
-                System.out.println("Why do rogues prefer leather armor? Because it’s made of Hide.");
+                System.out.println(puns[1]);
                 break;
             case 3:
-                System.out.println("I once heard of a Druid who could wield swords while using wild shape. She had a right to bear arms.");
+                System.out.println(puns[2]);
                 break;
         }
     }
