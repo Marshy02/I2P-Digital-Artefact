@@ -1,3 +1,9 @@
+/*
+NonPlayerCharacter.java
+Authored by Daniel Marsh
+Object Attribute Class to define the NPC entity Object.
+ */
+
 package Objects;
 import java.util.Scanner;
 import static java.lang.Integer.parseInt;

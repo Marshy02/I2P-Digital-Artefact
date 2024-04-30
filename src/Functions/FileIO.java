@@ -1,3 +1,9 @@
+/*
+FileIO.java
+Authored by Daniel Marsh
+File Interaction Functional Class to Write, Read and Delete files as parameterized functions are called from NPCMenu.
+ */
+
 package Functions;
 import Objects.NonPlayerCharacter;
 import java.io.*;
@@ -7,7 +13,6 @@ import static java.lang.Integer.parseInt;
 public class FileIO {
                                                         //Declare folder for storing saved NPC files
     public static final String DIRECTORY_NON_PLAYER_CHARACTERS = "src" + File.separator + "Characters";
-    public static Scanner input = new Scanner(System.in);
 
     public static void WriteToFile(NonPlayerCharacter npc){
         String fileName = npc.GetName() + ".txt";       //Generate a file using the inputted NPC's name

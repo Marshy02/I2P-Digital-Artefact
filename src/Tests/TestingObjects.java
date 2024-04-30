@@ -1,3 +1,9 @@
+/*
+TestingObjects.java
+Authored by Daniel Marsh
+Testing Class to test Constructors, Getters and Setters for NPC Object in NonPlayerCharacter.
+ */
+
 package Tests;
 import Objects.NonPlayerCharacter;
 public class TestingObjects {

@@ -1,3 +1,9 @@
+/*
+NPCMenu.java
+Authored by Daniel Marsh
+Menu Functional Class to allow the user to interact with a menu and Create, View, Edit and/or Delete NPC Objects, and display puns.
+ */
+
 package Functions;
 import java.io.File;
 import java.util.concurrent.ThreadLocalRandom;

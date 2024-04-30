@@ -1,3 +1,9 @@
+/*
+Main.java
+Authored by Daniel Marsh
+Main Class to Run to start the Menu Application.
+ */
+
 package Build;
 import Functions.NPCMenu;
 

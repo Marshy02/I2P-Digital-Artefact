@@ -1,3 +1,9 @@
+/*
+TestingFunctions.java
+Authored by Daniel Marsh
+Testing Class to test the Write, Read and Delete functionality of FileIO.
+ */
+
 package Tests;
 import Objects.NonPlayerCharacter;
 import Functions.*;
