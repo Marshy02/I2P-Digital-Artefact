@@ -1,5 +1,8 @@
+import java.io.File;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.*;
+import static java.lang.Integer.parseInt;
+
 public class NPCMenu {
     Scanner input = new Scanner(System.in);
     FileIO readNPC = new FileIO();
@@ -67,45 +70,6 @@ public class NPCMenu {
         input.close();
     }
 
-    public void EditNPC(){                              //Method for editing attributes of a chosen NPC
-        NonPlayerCharacter editNPC = readNPC.LoadNPCData();
-        System.out.println("You've chosen to edit information about " + editNPC.GetName());
-        System.out.println("---------------------------------------------------------------------------");
-        System.out.println("Which attribute would you like to change?");
-        String changeAttribute = input.nextLine();
-        switch (changeAttribute){                       //Allow the user to change a chosen attribute
-            case "Name":
-                System.out.println("What would you like to change their name to?");
-                editNPC.SetName(input.nextLine());
-                break;
-            case "Age":
-                System.out.println("How old should they be?");
-                editNPC.SetAge(input.nextLine());
-                break;
-            case "Gender":
-                System.out.println("What would you like to change their gender to?");
-                editNPC.SetGender(input.nextLine());
-                break;
-            case "Race":
-                System.out.println("What race should they be?");
-                editNPC.SetRace(input.nextLine());
-                break;
-            case "Voice":
-                System.out.println("How should they sound?");
-                editNPC.SetVoice(input.nextLine());
-                break;
-            case "Location":
-                System.out.println("Where should they be?");
-                editNPC.SetLocation(input.nextLine());
-                break;
-            case "Category":
-                System.out.println("What category of NPC should they fall under?");
-                editNPC.SetCategory(input.nextLine());
-                break;
-        }
-        FileIO.WriteToFile(editNPC);                    //Write updated details to selected file
-    }
-
     public void ReadNPC(){                              //Method for displaying details about a chosen NPC
         NonPlayerCharacter displayNPC = readNPC.LoadNPCData();
         System.out.println("You've selected to view details about " + displayNPC.GetName());
@@ -119,17 +83,106 @@ public class NPCMenu {
         System.out.println("Category: " + displayNPC.GetCategory());
     }
 
+    public void EditNPC(){                              //Method for editing attributes of a chosen NPC
+        NonPlayerCharacter editNPC = readNPC.LoadNPCData();
+        String changeAttribute;
+        int tempAge = 0;
+        String tempRace;
+        String tempCategory;
+        System.out.println("You've chosen to edit information about " + editNPC.GetName());
+        System.out.println("---------------------------------------------------------------------------");
+        do{                                             //Loop the user until they select a valid attribute to edit
+            System.out.println("Which attribute would you like to change?");
+            changeAttribute = input.nextLine();
+        } while(!(changeAttribute.equals("Name")) && !(changeAttribute.equals("Age")) && !(changeAttribute.equals("Gender"))
+                && !(changeAttribute.equals("Race")) && !(changeAttribute.equals("Voice"))
+                && !(changeAttribute.equals("Location")) && !(changeAttribute.equals("Category")));
+
+        switch (changeAttribute){                       //Allow the user to change a chosen attribute
+            case "Name":
+                String fileName = FileIO.DIRECTORY_NON_PLAYER_CHARACTERS + File.separator + editNPC.GetName() + ".txt";
+                File file = new File(fileName);
+                file.delete();                          //Delete file with old name so duplicates are not stored under multiple names
+
+                String tempName;
+                do{                                     //Loop the user to prevent null value input
+                    System.out.println("What would you like to change their name to?");
+                    tempName = input.nextLine();
+                } while(tempName.isEmpty());
+
+                editNPC.SetName(tempName);
+                break;
+            case "Age":
+                do{                                     //Loop the user until a valid age is inputted
+                    try{
+                        System.out.println("How old should they be?");
+                        tempAge = parseInt(input.nextLine());
+                    } catch(NumberFormatException e) {  //Displays a meaningful error message if the user enters anything but a number
+                        System.err.println(e.getMessage() + "\nAge will be set to 0, please add a valid age in OPTION 3 - Edit information about an NPC");
+                    }
+                } while(tempAge < 0);
+                editNPC.SetAge(tempAge);
+                break;
+            case "Gender":
+                String tempGender;
+                do{                                     //Loop the user to prevent null value input
+                    System.out.println("What would you like to change their gender to?");
+                    tempGender = input.nextLine();
+                } while(tempGender.isEmpty());
+
+                editNPC.SetGender(tempGender);
+                break;
+            case "Race":
+                do{                                     //Loop the user until a valid race is inputted
+                    System.out.println("What race should they be? Please select one of the following options:" +
+                            "\nHuman\nElf\nDwarf");
+                    tempRace = input.nextLine();
+                } while(!(tempRace.equals("Human")) && !(tempRace.equals("Elf")) && !(tempRace.equals("Dwarf")));
+                editNPC.SetRace(tempRace);
+                break;
+            case "Voice":
+                String tempVoice;
+                do{                                     //Loop the user to prevent null value input
+                    System.out.println("How should they sound?");
+                    tempVoice = input.nextLine();
+                } while (tempVoice.isEmpty());
+
+                editNPC.SetVoice(tempVoice);
+                break;
+            case "Location":
+                String tempLocation;
+                do{                                     //Loop the user to prevent null value input
+                    System.out.println("Where should they be?");
+                    tempLocation = input.nextLine();
+                } while(tempLocation.isEmpty());
+
+                editNPC.SetLocation(tempLocation);
+                break;
+            case "Category":
+                do{                                     //Loop the user until a valid category is inputted
+                    System.out.println("What category of NPC should they fall under? Please select one of the following options:" +
+                            "\nAllies\nEnemies\nService Providers\nQuest Givers\nNeutral Parties");
+                    tempCategory = input.nextLine();
+                } while(!(tempCategory.equals("Allies")) && !(tempCategory.equals("Enemies")) && !(tempCategory.equals("Service Providers"))
+                        && !(tempCategory.equals("Quest Givers")) && !(tempCategory.equals("Neutral Parties")));
+                editNPC.SetCategory(tempCategory);
+                break;
+        }
+        FileIO.WriteToFile(editNPC);                    //Write updated details to selected file
+    }
+
     public void dndPun(){                               //Method for displaying a D&D-themed pun
         int randomPun = ThreadLocalRandom.current().nextInt(1, 3 + 1);
+        String[] puns = {"Why do paladins prefer chain mail? Because it’s holey armor.", "Why do rogues prefer leather armor? Because it’s made of Hide.", "I once heard of a Druid who could wield swords while using wild shape. She had a right to bear arms."};
         switch (randomPun) {                            //Outputs one of three puns at random
             case 1:
-                System.out.println("Why do paladins prefer chain mail? Because it’s holey armor.");
+                System.out.println(puns[0]);
                 break;
             case 2:
-                System.out.println("Why do rogues prefer leather armor? Because it’s made of Hide.");
+                System.out.println(puns[1]);
                 break;
             case 3:
-                System.out.println("I once heard of a Druid who could wield swords while using wild shape. She had a right to bear arms.");
+                System.out.println(puns[2]);
                 break;
         }
     }
