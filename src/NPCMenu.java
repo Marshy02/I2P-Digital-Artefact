@@ -1,5 +1,7 @@
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.*;
+import static java.lang.Integer.parseInt;
+
 public class NPCMenu {
     Scanner input = new Scanner(System.in);
     FileIO readNPC = new FileIO();
@@ -67,6 +69,19 @@ public class NPCMenu {
         input.close();
     }
 
+    public void ReadNPC(){                              //Method for displaying details about a chosen NPC
+        NonPlayerCharacter displayNPC = readNPC.LoadNPCData();
+        System.out.println("You've selected to view details about " + displayNPC.GetName());
+        System.out.println("---------------------------------------------------------------------------");
+        System.out.println("Name: " + displayNPC.GetName());
+        System.out.println("Age: " + displayNPC.GetAge());
+        System.out.println("Gender: " + displayNPC.GetGender());
+        System.out.println("Race: " + displayNPC.GetRace());
+        System.out.println("Voice: " + displayNPC.GetVoice());
+        System.out.println("Location: " + displayNPC.GetLocation());
+        System.out.println("Category: " + displayNPC.GetCategory());
+    }
+
     public void EditNPC(){                              //Method for editing attributes of a chosen NPC
         NonPlayerCharacter editNPC = readNPC.LoadNPCData();
         System.out.println("You've chosen to edit information about " + editNPC.GetName());
@@ -80,7 +95,7 @@ public class NPCMenu {
                 break;
             case "Age":
                 System.out.println("How old should they be?");
-                editNPC.SetAge(input.nextLine());
+                editNPC.SetAge(parseInt(input.nextLine()));
                 break;
             case "Gender":
                 System.out.println("What would you like to change their gender to?");
@@ -104,19 +119,6 @@ public class NPCMenu {
                 break;
         }
         FileIO.WriteToFile(editNPC);                    //Write updated details to selected file
-    }
-
-    public void ReadNPC(){                              //Method for displaying details about a chosen NPC
-        NonPlayerCharacter displayNPC = readNPC.LoadNPCData();
-        System.out.println("You've selected to view details about " + displayNPC.GetName());
-        System.out.println("---------------------------------------------------------------------------");
-        System.out.println("Name: " + displayNPC.GetName());
-        System.out.println("Age: " + displayNPC.GetAge());
-        System.out.println("Gender: " + displayNPC.GetGender());
-        System.out.println("Race: " + displayNPC.GetRace());
-        System.out.println("Voice: " + displayNPC.GetVoice());
-        System.out.println("Location: " + displayNPC.GetLocation());
-        System.out.println("Category: " + displayNPC.GetCategory());
     }
 
     public void dndPun(){                               //Method for displaying a D&D-themed pun

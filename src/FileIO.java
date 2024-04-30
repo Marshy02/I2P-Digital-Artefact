@@ -1,5 +1,7 @@
 import java.io.*;
 import java.util.Scanner;
+import static java.lang.Integer.parseInt;
+
 public class FileIO {
                                                         //Declare folder for storing saved NPC files
     public static final String DIRECTORY_NON_PLAYER_CHARACTERS = "src" + File.separator + "Characters";
@@ -47,7 +49,7 @@ public class FileIO {
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
             String name = bufferedReader.readLine();
-            String age = bufferedReader.readLine();
+            int age = parseInt(bufferedReader.readLine());
             String gender = bufferedReader.readLine();
             String race = bufferedReader.readLine();
             String voice = bufferedReader.readLine();
