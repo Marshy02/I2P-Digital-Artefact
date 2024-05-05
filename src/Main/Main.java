@@ -4,7 +4,7 @@ Authored by Daniel Marsh
 Main Class to Run to start the Menu Application.
  */
 
-package Build;
+package Main;
 import Functions.NPCMenu;
 
 public class Main {

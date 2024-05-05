@@ -14,34 +14,45 @@ public class FileIO {
                                                         //Declare folder for storing saved NPC files
     public static final String DIRECTORY_NON_PLAYER_CHARACTERS = "src" + File.separator + "Characters";
 
+    public static void TryWrite(File file, NonPlayerCharacter npc){
+        try {                                           //Try to write each NPC attribute as a separate line in a text file
+            FileWriter fileWriter = new FileWriter(file);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
+            bufferedWriter.write(npc.GetName() + "\n");
+            bufferedWriter.write(npc.GetAge() + "\n");
+            bufferedWriter.write(npc.GetGender() + "\n");
+            bufferedWriter.write(npc.GetRace() + "\n");
+            bufferedWriter.write(npc.GetVoice() + "\n");
+            bufferedWriter.write(npc.GetLocation() + "\n");
+            bufferedWriter.write(npc.GetCategory() + "\n");
+
+            bufferedWriter.close();
+            fileWriter.close();
+        } catch (IOException e) {                       //Catch any Input/Output errors
+            System.err.println(e.getMessage());
+        }
+    }
+
     public static void WriteToFile(NonPlayerCharacter npc){
         String fileName = npc.GetName() + ".txt";       //Generate a file using the inputted NPC's name
         File file = new File(DIRECTORY_NON_PLAYER_CHARACTERS, fileName);
 
         file.getParentFile().mkdirs();                  //Creates a new Characters directory if one does not exist
 
-        if(file.exists()) {                             //Check if file already exists
+        if(file.exists()) {                             //Display error if file already exists
             System.err.println("An NPC under the name " + npc.GetName() + " already exists, please try again with a new name or edit this file with OPTION 3 - Edit information about an NPC");
         }
-        else {
-            try {                                        //Try to write each NPC attribute as a separate line in a text file
-                FileWriter fileWriter = new FileWriter(file);
-                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-
-                bufferedWriter.write(npc.GetName() + "\n");
-                bufferedWriter.write(npc.GetAge() + "\n");
-                bufferedWriter.write(npc.GetGender() + "\n");
-                bufferedWriter.write(npc.GetRace() + "\n");
-                bufferedWriter.write(npc.GetVoice() + "\n");
-                bufferedWriter.write(npc.GetLocation() + "\n");
-                bufferedWriter.write(npc.GetCategory() + "\n");
-
-                bufferedWriter.close();
-                fileWriter.close();
-            } catch (IOException e) {                          //Catch any Input/Output errors
-                System.err.println(e.getMessage());
-            }
+        else {                                          //Try to write a new file
+            TryWrite(file, npc);
         }
+    }
+
+    public static void EditFile(NonPlayerCharacter npc){
+        String fileName = npc.GetName() + ".txt";       //Generate a filepath using the inputted NPC's name
+        File file = new File(DIRECTORY_NON_PLAYER_CHARACTERS, fileName);
+
+        TryWrite(file, npc);                            //Try to write to existing file
     }
 
     public static NonPlayerCharacter LoadNPCData(String npcName){

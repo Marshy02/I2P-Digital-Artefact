@@ -187,7 +187,7 @@ public class NPCMenu {
                 editNPC.SetCategory(tempCategory);
                 break;
         }
-        FileIO.WriteToFile(editNPC);                    //Write updated details to selected file
+        FileIO.EditFile(editNPC);                       //Write updated details to selected file
     }
 
     public void DeleteNPC(){                            //Method for deleting an NPC
