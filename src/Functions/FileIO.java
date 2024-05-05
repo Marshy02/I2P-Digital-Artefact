@@ -7,7 +7,6 @@ File Interaction Functional Class to Write, Read and Delete files as parameteriz
 package Functions;
 import Objects.NonPlayerCharacter;
 import java.io.*;
-import java.util.Scanner;
 import static java.lang.Integer.parseInt;
 
 public class FileIO {
@@ -59,8 +58,7 @@ public class FileIO {
         String fileName = DIRECTORY_NON_PLAYER_CHARACTERS + File.separator + npcName + ".txt";
         File file = new File(fileName);                 //Designates a file to check based on user's input
 
-        if (!file.exists()){                            //Checks if the file exists and errors out if not
-            System.err.println("File does not exist or could not be read");
+        if (!file.exists()){                            //Checks if the file exists and returns null for error catching if not
             return null;
         }
 

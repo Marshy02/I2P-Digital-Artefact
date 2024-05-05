@@ -85,16 +85,20 @@ public class NPCMenu {
             System.out.println("Which NPC would you like to view details about?");
             npcName = input.nextLine();
         } while(npcName.isEmpty());
-        NonPlayerCharacter displayNPC = readNPC.LoadNPCData(npcName);
-        System.out.println("You've selected to view details about " + displayNPC.GetName());
-        System.out.println("---------------------------------------------------------------------------");
-        System.out.println("Name: " + displayNPC.GetName());
-        System.out.println("Age: " + displayNPC.GetAge());
-        System.out.println("Gender: " + displayNPC.GetGender());
-        System.out.println("Race: " + displayNPC.GetRace());
-        System.out.println("Voice: " + displayNPC.GetVoice());
-        System.out.println("Location: " + displayNPC.GetLocation());
-        System.out.println("Category: " + displayNPC.GetCategory());
+        try{
+            NonPlayerCharacter displayNPC = readNPC.LoadNPCData(npcName);
+            System.out.println("You've selected to view details about " + displayNPC.GetName());
+            System.out.println("---------------------------------------------------------------------------");
+            System.out.println("Name: " + displayNPC.GetName());
+            System.out.println("Age: " + displayNPC.GetAge());
+            System.out.println("Gender: " + displayNPC.GetGender());
+            System.out.println("Race: " + displayNPC.GetRace());
+            System.out.println("Voice: " + displayNPC.GetVoice());
+            System.out.println("Location: " + displayNPC.GetLocation());
+            System.out.println("Category: " + displayNPC.GetCategory());
+        } catch(NullPointerException e) {
+            System.err.println("Saved NPC not found or could not be read, please try again with an existing character\n" + e.getMessage());
+        }
     }
 
     public void EditNPC(){                              //Method for editing attributes of a chosen NPC
