@@ -70,7 +70,7 @@ public class NPCMenu {
                 !(stayOption.equals("yes")) && !(stayOption.equals("no")) &&
                 !(stayOption.equals("Y")) && !(stayOption.equals("N")) &&
                 !(stayOption.equals("y")) && !(stayOption.equals("n")));
-            } else {                                    //Exit out if user chooses an option not between 1 and 4
+            } else {                                    //Exit out if user chooses an option not between 1 and 6
                 System.out.println("Invalid option chosen, please start again");
             }
         }

@@ -22,7 +22,7 @@ public class TestingObjects {
     }
 
     public static void testNPCConstructor(){            //Testing Constructors and Getters with typical NPC data
-        name = "Legolas";                        //Typical attributes to be read
+        name = "Legolas";                               //Typical attributes to be read
         age = 2931;
         gender = "Male";
         race = "Elf";
